@@ -26,7 +26,7 @@
             width: 300px;
             padding: 10px;
             border: 1px solid #ccc;
-            border-radius: 3px;
+            border-radius: 5px;
         }
 
         .search-btn {
@@ -34,16 +34,74 @@
             background-color: #007BFF;
             color: #fff;
             border: none;
-            border-radius: 3px;
+            border-radius: 5px;
             cursor: pointer;
             margin-left: 10px;
         }
+
+        .results {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .vertical-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .horiztonal-stack {
+            display: flex;
+            flex-direction: row;
+            gap: 5px;
+        }
+
+        #backend-url {
+            min-width: 360px;
+            box-sizing: border-box;
+            margin-bottom: 5px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
     </style>
 </head>
 <body>
+    <div class="vertical-stack">
     <div class="search-container">
-        <input type="text" class="search-bar" placeholder="Intent...">
-        <button class="search-btn">Chat</button>
+        <div class="config-container">
+            <div class="horiztonal-stack">
+                <p>Backend Host URL: </p>
+                <input type="text" id="backend-url" placeholder="Enter Flask App URL (e.g., http://127.0.0.1:5000)">
+            </div>
+            
+        </div>
+        <div class="horiztonal-stack">
+            <p>Search Query: </p>
+            <input type="text" class="search-bar" placeholder="Intent...">
+            <button class="search-btn">Chat</button>
+        </div>
+        
     </div>
+    <div class="results">Search Results: </div>
+</div>
+    <script>
+        document.querySelector('.search-btn').addEventListener('click', function () {
+            let intent = document.querySelector('.search-bar').value;
+            let backendURL = document.getElementById('backend-url').value;
+            fetch(`${backendURL}/query?search=${intent}`)
+                .then(response => response.json())
+                .then(data => {
+                    let resultsDiv = document.querySelector('.results');
+                    resultsDiv.innerHTML = 'Matched Digis: ' + data.homes.map(home => home.metadata.name).join(', ');
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
+        });
+    </script>
 </body>
 </html>

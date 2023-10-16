@@ -1,0 +1,20 @@
+apiVersion: home.digi.dev/v1
+kind: Home
+metadata:
+  name: Office
+  namespace: default
+spec:
+  control:
+    mode: "Auto"
+  mount:
+    home.digi.dev/v1/rooms:
+      default/livingRoom4:
+        brightness: 85
+        mode: "On"
+        mount:
+          home.digi.dev/v1/objects:
+            - class: "Fan"
+              name: "Main Fan 4"
+            - class: "TV"
+              name: "Room TV 4"
+

@@ -1,0 +1,20 @@
+apiVersion: home.digi.dev/v1
+kind: Home
+metadata:
+  name: Apartement
+  namespace: default
+spec:
+  control:
+    mode: "Auto"
+  mount:
+    home.digi.dev/v1/rooms:
+      default/livingRoom3:
+        brightness: 80
+        mode: "On"
+        mount:
+          home.digi.dev/v1/objects:
+            - class: "Lamp"
+              name: "Main Lamp 3"
+            - class: "Heater"
+              name: "Room Heater 3"
+

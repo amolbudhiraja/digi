@@ -1,0 +1,19 @@
+apiVersion: home.digi.dev/v1
+kind: Home
+metadata:
+  name: Cory
+  namespace: default
+spec:
+  control:
+    mode: "Auto"
+  mount:
+    home.digi.dev/v1/rooms:
+      default/livingRoom2:
+        brightness: 75
+        mode: "On"
+        mount:
+          home.digi.dev/v1/objects:
+            - class: "Fan"
+              name: "Main Fan 2"
+            - class: "TV"
+              name: "Room TV 2"

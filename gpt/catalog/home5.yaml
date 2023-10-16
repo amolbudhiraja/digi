@@ -1,0 +1,19 @@
+apiVersion: home.digi.dev/v1
+kind: Home
+metadata:
+  name: Mall
+  namespace: default
+spec:
+  control:
+    mode: "Auto"
+  mount:
+    home.digi.dev/v1/rooms:
+      default/livingRoom5:
+        brightness: 90
+        mode: "On"
+        mount:
+          home.digi.dev/v1/objects:
+            - class: "Lamp"
+              name: "Main Lamp 5"
+            - class: "Heater"
+              name: "Room Heater 5"
